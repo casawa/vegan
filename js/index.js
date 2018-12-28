@@ -1,14 +1,14 @@
-var TEXT = [
-    "If you could reduce suffering",
-    "If you could save 400 lives yearly",
-    "If you could reduce greenhouse emissions",
-    "If you could reduce greenhouse emissions",
-    "Would you?",
-    "Now imagine this was all done to humans",
-    "I'm not going to say it's super easy - but it is incredibly \
-     gratifying knowing every meal is suffering-free",
-    "All it takes is a choice",
-    "V E G A N",
+var FRAMES = [
+    ["If you could reduce suffering", 'TEXT'],
+    ["If you could save 400 lives yearly", 'TEXT'],
+    ["If you could reduce greenhouse emissions", 'TEXT'],
+    ["If you could reduce greenhouse emissions", 'TEXT'],
+    ["Would you?", 'TEXT'],
+    ["Now imagine this was all done to humans", 'TEXT'],
+    ["I'm not going to say it's super easy - but it is incredibly \
+    [ gratifying knowing every meal is suffering-free", 'TEXT'],
+    ["All it takes is a choice", 'TEXT'],
+    ["V E G A N", 'TEXT'],
 ];
 
 function setText(elem, text) {
@@ -36,7 +36,11 @@ function delayedSetText(elem, text, delay) {
     setTimeout(function() { setText(elem, text); }, delay);
 }
 
-// Change the text over time
-for (var i = 0; i < TEXT.length; i++) {
-    delayedSetText($("#main_text"), TEXT[i], i * 2000);
+// Change the frames over time
+for (var i = 0; i < FRAMES.length; i++) {
+    frame = FRAMES[i];
+
+    if (frame[1] == 'TEXT') {
+        delayedSetText($("#main_text"), frame[0], i * 2000);
+    }
 }
