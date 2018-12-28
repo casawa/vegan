@@ -1,0 +1,9 @@
+#main {
+    height: 100vh;
+    /* Centering inspired by https://stackoverflow.com/questions/10707253/css-full-screen-div-with-text-in-the-middle*/ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato';
+    font-size: 400%;
+}
