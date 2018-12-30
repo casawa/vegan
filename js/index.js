@@ -114,8 +114,8 @@ function delayedSetSource(elem, src, delay) {
 }
 
 // Uniform delays (for now) for various frame content-types
-var TEXT_DELAY_MS = 3000;
-var IMAGE_DELAY_MS = 5000;
+var TEXT_DELAY_MS = 2500;
+var IMAGE_DELAY_MS = 4000;
 var VIDEO_DELAY_MS = 8000;
 
 var next_delay_ms = 0;
