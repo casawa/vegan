@@ -1,16 +1,51 @@
+// Rotating multimedia content of the front page
+// TODO: Move this separately
 var FRAMES = [
-    ["https://cdn.80000hours.org/wp-content/uploads/2016/04/pigs-in-factory-farm.jpg", 'IMAGE'],
-    ["If you could reduce suffering", 'TEXT'],
-    ["If you could save 400 lives yearly", 'TEXT'],
-    ["If you could reduce greenhouse emissions", 'TEXT'],
-    ["If you could save clean water", 'TEXT'],
-    ["Would you?", 'TEXT'],
-    ["Now imagine this was all done to humans", 'TEXT'],
-    ["I'm not going to say it's super easy - but it is incredibly \
-      gratifying knowing every meal is suffering-free", 'TEXT'],
-    ["All it takes is a choice", 'TEXT'],
-    ["V E G A N", 'TEXT'],
-    ["https://www.youtube.com/embed/W4HJcq8qHAY?controls=0", 'VIDEO'],
+    {
+        type: 'IMAGE',
+        source: "https://cdn.80000hours.org/wp-content/uploads/2016/04/pigs-in-factory-farm.jpg"
+    },
+    {
+        type: 'TEXT',
+        text: "If you could reduce suffering"
+    },
+    {
+        type: 'TEXT',
+        text: "If you could save 400 lives yearly"
+    },
+    {
+        type: 'TEXT',
+        text: "If you could reduce greenhouse emissions"
+    },
+    {
+        type: 'TEXT',
+        text: "If you could save clean water"
+    },
+    {
+        type: 'TEXT',
+        text: "Would you?"
+    },
+    {
+        type: 'TEXT',
+        text: "Now imagine this was all done to humans"
+    },
+    {
+        type: 'TEXT',
+        text: "I'm not going to say it's super easy - but it is incredibly \
+                 gratifying knowing every meal is suffering-free"
+    },
+    {
+        type: 'TEXT',
+        text: "All it takes is a choice"
+    },
+    {
+        type: 'TEXT',
+        text: "V E G A N"
+    },
+    {
+        type: 'VIDEO',
+        source: "https://www.youtube.com/embed/W4HJcq8qHAY?controls=0"
+    },
 ];
 
 function setText(elem, text) {
@@ -89,14 +124,14 @@ var next_delay_ms = 0;
 for (var i = 0; i < FRAMES.length; i++) {
     frame = FRAMES[i];
 
-    if (frame[1] == 'TEXT') {
-        delayedSetText($("#main_text"), frame[0], next_delay_ms);
+    if (frame.type == 'TEXT') {
+        delayedSetText($("#main_text"), frame.text, next_delay_ms);
         next_delay_ms += TEXT_DELAY_MS;
-    } else if (frame[1] == 'IMAGE') {
-        delayedSetSource($("#main_image"), frame[0], next_delay_ms);
+    } else if (frame.type == 'IMAGE') {
+        delayedSetSource($("#main_image"), frame.source, next_delay_ms);
         next_delay_ms += IMAGE_DELAY_MS;
-    } else if (frame[1] == 'VIDEO') {
-        delayedSetSource($("#main_video"), frame[0], next_delay_ms);
+    } else if (frame.type == 'VIDEO') {
+        delayedSetSource($("#main_video"), frame.source, next_delay_ms);
         next_delay_ms += VIDEO_DELAY_MS;
     }
 }
