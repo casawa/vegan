@@ -1,4 +1,5 @@
 var FRAMES = [
+    ["https://cdn.80000hours.org/wp-content/uploads/2016/04/pigs-in-factory-farm.jpg", 'IMAGE'],
     ["If you could reduce suffering", 'TEXT'],
     ["If you could save 400 lives yearly", 'TEXT'],
     ["If you could reduce greenhouse emissions", 'TEXT'],
@@ -10,7 +11,6 @@ var FRAMES = [
     ["All it takes is a choice", 'TEXT'],
     ["V E G A N", 'TEXT'],
     ["https://www.youtube.com/embed/W4HJcq8qHAY?controls=0", 'VIDEO'],
-    ["https://www.youtube.com/embed/NjDzxJ4ICKY?controls=0&amp;start=173&end=195", 'VIDEO'],
 ];
 
 function setText(elem, text) {
@@ -25,15 +25,16 @@ function setText(elem, text) {
     elem.show();
 }
 
-function setVideo(elem, videoSrc) {
-    /* Sets the source of a jQuery element.
+function setAttr(elem, attr, value) {
+    /* Sets an attribute of a jQuery element.
      *
      * Parameters
      * ----------
      * elem : jQuery element
-     * videoSrc : string
+     * attr : string
+     * value : string
      */
-    elem.attr("src", videoSrc);
+    elem.attr(attr, value);
     elem.show();
 }
 
@@ -42,7 +43,10 @@ function clear() {
     setText($("#main_text"), "");
     $("#main_text").hide();
 
-    setVideo($("#main_video"), "about:blank");
+    setAttr($("#main_image"), "src", "about:blank");
+    $("#main_image").hide();
+
+    setAttr($("#main_video"), "src", "about:blank");
     $("#main_video").hide();
 }
 
@@ -60,18 +64,18 @@ function delayedSetText(elem, text, delay) {
     setTimeout(function() { clear(); setText(elem, text); }, delay);
 }
 
-function delayedSetVideo(elem, videoSrc, delay) {
+function delayedSetSource(elem, src, delay) {
     /* Sets the source of a jQuery element after
      * delay ms.
      *
      * Parameters
      * ----------
      * elem : jQuery element
-     * videoSrc : string
+     * src : string
      * delay : int
      *   Delay in ms
      */
-    setTimeout(function() { clear(); setVideo(elem, videoSrc); }, delay);
+    setTimeout(function() { clear(); setAttr(elem, "src", src); }, delay);
 }
 
 
@@ -81,7 +85,9 @@ for (var i = 0; i < FRAMES.length; i++) {
 
     if (frame[1] == 'TEXT') {
         delayedSetText($("#main_text"), frame[0], i * 2000);
+    } else if (frame[1] == 'IMAGE') {
+        delayedSetSource($("#main_image"), frame[0], i * 2000);
     } else if (frame[1] == 'VIDEO') {
-        delayedSetVideo($("#main_video"), frame[0], i * 2000);
+        delayedSetSource($("#main_video"), frame[0], i * 2000);
     }
 }
