@@ -1,9 +1,10 @@
 // Rotating multimedia content of the front page
-// TODO: Move this separately
+// TODO: Move this to a separate file
 var FRAMES = [
     {
         type: 'IMAGE',
-        source: "https://cdn.80000hours.org/wp-content/uploads/2016/04/pigs-in-factory-farm.jpg"
+        source: "https://cdn.80000hours.org/wp-content/uploads/2016/04/pigs-in-factory-farm.jpg",
+        credit: "https://80000hours.org/2016/04/new-profile-on-factory-farming/"
     },
     {
         type: 'TEXT',
@@ -81,6 +82,9 @@ function clear() {
     setAttr($("#main_image"), "src", "about:blank");
     $("#main_image").hide();
 
+    setText($("#credit"), "");
+    $("#credit").hide();
+
     setAttr($("#main_video"), "src", "about:blank");
     $("#main_video").hide();
 }
@@ -99,18 +103,41 @@ function delayedSetText(elem, text, delay) {
     setTimeout(function() { clear(); setText(elem, text); }, delay);
 }
 
-function delayedSetSource(elem, src, delay) {
-    /* Sets the source of a jQuery element after
-     * delay ms.
+function delayedSetImage(imgElem, imgURL, creditElem, imgSrc, delay) {
+    /* Sets the frame image and source after delay ms.
      *
      * Parameters
      * ----------
-     * elem : jQuery element
-     * src : string
+     * imgElem : jQuery element
+     * imgURL : string
+     *   Image URL
+     * creditElem : jQuery element
+     * imgSrc : string
+     *   Source of the image
      * delay : int
      *   Delay in ms
      */
-    setTimeout(function() { clear(); setAttr(elem, "src", src); }, delay);
+    setTimeout(function() {
+        clear();
+        setAttr(imgElem, "src", imgURL);
+        setText(creditElem, "Credit: " + imgSrc);
+    }, delay);
+}
+
+function delayedSetVideo(videoElem, videoURL, delay) {
+    /* Sets the frame video after delay ms.
+     *
+     * Parameters
+     * ----------
+     * videoElem : jQuery element
+     * videoURL : string
+     * delay : int
+     *   Delay in ms
+     */
+    setTimeout(function() {
+        clear();
+        setAttr(videoElem, "src", videoURL);
+    }, delay);
 }
 
 // Uniform delays (for now) for various frame content-types
@@ -128,10 +155,12 @@ for (var i = 0; i < FRAMES.length; i++) {
         delayedSetText($("#main_text"), frame.text, next_delay_ms);
         next_delay_ms += TEXT_DELAY_MS;
     } else if (frame.type == 'IMAGE') {
-        delayedSetSource($("#main_image"), frame.source, next_delay_ms);
+        delayedSetImage($("#main_image"), frame.source,
+                        $("#credit"), frame.credit,
+                        next_delay_ms);
         next_delay_ms += IMAGE_DELAY_MS;
     } else if (frame.type == 'VIDEO') {
-        delayedSetSource($("#main_video"), frame.source, next_delay_ms);
+        delayedSetVideo($("#main_video"), frame.source, next_delay_ms);
         next_delay_ms += VIDEO_DELAY_MS;
     }
 }
