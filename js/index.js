@@ -78,16 +78,25 @@ function delayedSetSource(elem, src, delay) {
     setTimeout(function() { clear(); setAttr(elem, "src", src); }, delay);
 }
 
+// Uniform delays (for now) for various frame content-types
+var TEXT_DELAY_MS = 3000;
+var IMAGE_DELAY_MS = 5000;
+var VIDEO_DELAY_MS = 8000;
+
+var next_delay_ms = 0;
 
 // Change the frames over time
 for (var i = 0; i < FRAMES.length; i++) {
     frame = FRAMES[i];
 
     if (frame[1] == 'TEXT') {
-        delayedSetText($("#main_text"), frame[0], i * 2000);
+        delayedSetText($("#main_text"), frame[0], next_delay_ms);
+        next_delay_ms += TEXT_DELAY_MS;
     } else if (frame[1] == 'IMAGE') {
-        delayedSetSource($("#main_image"), frame[0], i * 2000);
+        delayedSetSource($("#main_image"), frame[0], next_delay_ms);
+        next_delay_ms += IMAGE_DELAY_MS;
     } else if (frame[1] == 'VIDEO') {
-        delayedSetSource($("#main_video"), frame[0], i * 2000);
+        delayedSetSource($("#main_video"), frame[0], next_delay_ms);
+        next_delay_ms += VIDEO_DELAY_MS;
     }
 }
