@@ -50,7 +50,7 @@ var FRAMES = [
 ];
 
 function setText(elem, text) {
-    /* Sets the text of a jQuery element.
+    /* Sets the text of a jQuery element and shows it.
      *
      * Parameters
      * ----------
@@ -62,7 +62,7 @@ function setText(elem, text) {
 }
 
 function setAttr(elem, attr, value) {
-    /* Sets an attribute of a jQuery element.
+    /* Sets an attribute of a jQuery element and shows it.
      *
      * Parameters
      * ----------
@@ -75,7 +75,7 @@ function setAttr(elem, attr, value) {
 }
 
 function clear() {
-    /* Clears the html elements. */
+    /* Clears all content on the page. */
     setText($("#main_text"), "");
     $("#main_text").hide();
 
